@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse Hive - Smart Health Monitoring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff6e0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: #e8590c;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 25px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #0002;
+        }
+
+        h2 {
+            color: #e8590c;
+        }
+
+        button {
+            background: #e8590c;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b84000;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .result {
+            background: #ffe8cc;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+            color: #8a3200;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐝 Pulse Hive</h1>
+    <p>Smart Health Monitoring Connected Like a Hive</p>
+</header>
+
+<div class="container">
+
+    <h2>Explore Pulse Hive</h2>
+
+    <p id="description">
+        Pulse Hive tracks your heartbeat and shares health insights.
+    </p>
+
+    <button onclick="changeText()">Explore More</button>
+
+    <hr>
+
+    <h2>Discover the Hive</h2>
+
+    <p id="message">Discover the future of connected health!</p>
+
+    <button onclick="showMessage()">Discover Now</button>
+
+    <hr>
+
+    <h2>Advanced Pulse Analytics</h2>
+
+    <p class="info">
+        Pulse analytics turns raw heartbeat data into early health warnings.
+    </p>
+
+    <button onclick="changeColor()">Explore Analytics</button>
+
+    <hr>
+
+    <h2>Pulse Hive Enquiry</h2>
+
+    <form id="bioForm">
+        <label>Enter Your Name:</label>
+        <input type="text" id="username"
+               placeholder="Enter your name" required>
+
+        <label>Select Pulse Hive Feature:</label>
+        <select id="innovation">
+            <option value="Heart Rate Tracking">Heart Rate Tracking</option>
+            <option value="Smart Wearables">Smart Wearables</option>
+            <option value="Emergency Alerts">Emergency Alerts</option>
+            <option value="Community Insights">Community Insights</option>
+        </select>
+
+        <button type="submit">Submit Enquiry</button>
+    </form>
+
+    <p id="formResult" class="result">
+        Your result will appear here.
+    </p>
+
+    <hr>
+
+    <h2>Latest Hive Updates</h2>
+
+    <p id="timeoutResult">Waiting for hive updates...</p>
+
+    <button onclick="startTimeout()">Get Updates</button>
+    <button onclick="stopTimeout()">Cancel Updates</button>
+
+    <hr>
+
+    <h2>Heartbeat Activity Timer</h2>
+
+    <p>Pulse Timer: <span id="counter">0</span> seconds</p>
+
+    <button onclick="startInterval()">Start Timer</button>
+    <button onclick="stopInterval()">Stop Timer</button>
+
+    <hr>
+
+    <h2>Manage Health Alerts</h2>
+
+    <p id="cancelMessage">A Pulse Hive health alert is scheduled.</p>
+
+    <button onclick="scheduleNotification()">Schedule Alert</button>
+    <button onclick="cancelNotification()">Cancel Alert</button>
+
+    <hr>
+
+    <h2>Live Pulse Monitoring</h2>
+
+    <p id="clock">Monitoring pulse data...</p>
+
+    <button onclick="startMonitoring()">Start Monitoring</button>
+    <button onclick="stopMonitoring()">Stop Monitoring</button>
+
+</div>
+
+<footer>
+    <p>© 2026 Pulse Hive | Every Heartbeat Connected</p>
+</footer>
+
+<script>
+
+// 1. DOM Elements with IDs
+function changeText() {
+    document.getElementById("description").innerHTML =
+        "Pulse Hive connects wearables and people for smarter everyday healthcare.";
+}
+
+// 2. Buttons with onclick
+function showMessage() {
+    document.getElementById("message").innerHTML =
+        "Welcome to Pulse Hive, where every heartbeat counts!";
+}
+
+// 3. querySelector()
+function changeColor() {
+    document.querySelector(".info").style.color = "green";
+}
+
+// 4. Interactive Form Element
+document.querySelector("#bioForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let name = document.querySelector("#username").value;
+    let topic = document.querySelector("#innovation").value;
+
+    document.querySelector("#formResult").innerHTML =
+        "Hello " + name + "! Your selected feature is " + topic + ".";
+});
+
+// 5. setTimeout()
+let timeout;
+
+function startTimeout() {
+    clearTimeout(timeout);
+
+    document.getElementById("timeoutResult").innerHTML =
+        "Hive updates will appear in 3 seconds...";
+
+    timeout = setTimeout(function() {
+        document.getElementById("timeoutResult").innerHTML =
+            "New Pulse Hive update available!";
+    }, 3000);
+}
+
+function stopTimeout() {
+    clearTimeout(timeout);
+
+    document.getElementById("timeoutResult").innerHTML =
+        "Hive update cancelled.";
+}
+
+// 6. setInterval()
+let count = 0;
+let timer;
+
+function startInterval() {
+    if (timer) return;
+
+    timer = setInterval(function() {
+        count++;
+        document.getElementById("counter").innerHTML = count;
+    }, 1000);
+}
+
+function stopInterval() {
+    clearInterval(timer);
+    timer = null;
+}
+
+// 7. clearTimeout()
+let notification;
+
+function scheduleNotification() {
+    clearTimeout(notification);
+
+    document.getElementById("cancelMessage").innerHTML =
+        "Health alert scheduled for 5 seconds...";
+
+    notification = setTimeout(function() {
+        document.getElementById("cancelMessage").innerHTML =
+            "Pulse Hive health alert received!";
+    }, 5000);
+}
+
+function cancelNotification() {
+    clearTimeout(notification);
+
+    document.getElementById("cancelMessage").innerHTML =
+        "Health alert cancelled successfully!";
+}
+
+// 8. clearInterval()
+let monitoring;
+
+function startMonitoring() {
+    if (monitoring) return;
+
+    monitoring = setInterval(function() {
+        document.getElementById("clock").innerHTML =
+            "Pulse monitoring active at " +
+            new Date().toLocaleTimeString();
+    }, 1000);
+}
+
+function stopMonitoring() {
+    clearInterval(monitoring);
+    monitoring = null;
+
+    document.getElementById("clock").innerHTML =
+        "Pulse monitoring stopped.";
+}
+
+</script>
+
+</body>
+</html>
